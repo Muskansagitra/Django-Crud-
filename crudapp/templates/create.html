@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid my-5">
+    <div class="row my-4">
+        <div class="col-sm-4 offset-sm-1">
+            <h2> To-Do Form </h2>
+            <hr>
+       <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" class="btn btn-primary" value="submit"> 
+             </form>
+        </div>
+           <div class="col-sm-6 offset-sm-1 ">
+            <table class="table table-hover">
+                <thead>
+                    <h2 > To-Do List</h2>
+                    
+                  <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Book</th>
+                    <th scope="col">Game</th>
+                    <th scope="col">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                {% for c in cru %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{c.name}}</td>
+                    <td>{{c.book}}</td>
+                    <td>{{c.game}}</td>
+                  
+                    <td><a href="{% url 'update' c.id %}" class="btn btn-warning btn-sm">Edit</a></td>
+                    <td><a href="{% url 'delete' c.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                  </tr>
+                {% endfor %} 
+              </table>
+            </div>
+           </div> 
+        </div>
+</div>
+{% endblock %}
